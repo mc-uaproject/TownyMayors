@@ -2,3 +2,6 @@
 /.idea
 /.gradle
 /gradle
+/run/
+src/main/java/dev/ua/keepcalm/townymayors/commands/GrantWealth.java
+src/main/java/dev/ua/keepcalm/townymayors/commands/RemoveWealth.java

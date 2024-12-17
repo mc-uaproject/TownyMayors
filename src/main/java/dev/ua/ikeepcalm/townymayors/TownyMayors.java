@@ -16,7 +16,6 @@ public final class TownyMayors extends JavaPlugin {
     Towny towny = (Towny) getServer().getPluginManager().getPlugin("Towny");
     private LuckPerms luckPerms;
     private ClaimListener claimListener;
-    private GrantWealth grantWealth;
 
     @Override
     public void onEnable() {
@@ -36,24 +35,27 @@ public final class TownyMayors extends JavaPlugin {
         }
 
         getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
 
-        getServer().getPluginManager().registerEvents(new ClaimListener(this, luckPerms), this);
+        getServer().getPluginManager().registerEvents(new ClaimListener(this, luckPerms, this), this);
         new MayorTask(this, luckPerms).runTaskTimer(this, 0, 20 * 60 * 180);
 
-        Objects.requireNonNull(getCommand("grantwealth")).setExecutor(new GrantWealth(luckPerms));
-        Objects.requireNonNull(getCommand("removewealth")).setExecutor(new RemoveWealth(luckPerms));
-
-        claimListener = new ClaimListener(this, luckPerms);
+        claimListener = new ClaimListener(this, luckPerms, this);
         Objects.requireNonNull(getCommand("getchunklimit")).setExecutor(new GetChunkLimit(claimListener, luckPerms));
-        grantWealth = new GrantWealth(luckPerms);
-        Objects.requireNonNull(getCommand("setchunklimit")).setExecutor(new SetChunkLimit(grantWealth, luckPerms));
+        Objects.requireNonNull(getCommand("setchunklimit")).setExecutor(new SetChunkLimit(luckPerms, this, claimListener));
         Objects.requireNonNull(getCommand("removechunklimit")).setExecutor(new RemoveChunkLimit(luckPerms, claimListener));
+
+        //unnecessary
+        //Objects.requireNonNull(getCommand("grantwealth")).setExecutor(new GrantWealth(luckPerms));
+        //Objects.requireNonNull(getCommand("removewealth")).setExecutor(new RemoveWealth(luckPerms));
 
         getLogger().info("TownyMayors has been enabled!");
     }
 
     @Override
     public void onDisable() {
+        saveConfig();
         getLogger().info("TownyMayors has been disabled!");
     }
+
 }

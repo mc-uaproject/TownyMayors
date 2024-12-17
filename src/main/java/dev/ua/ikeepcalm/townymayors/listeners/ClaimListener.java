@@ -29,10 +29,12 @@ public class ClaimListener implements Listener {
     private final FileConfiguration mayorsConfig;
     private final File mayorsFile;
     private final LuckPerms luckPerms;
+    private final TownyMayors townyMayors;
 
-    public ClaimListener(TownyMayors towny, LuckPerms luckPerms) {
+    public ClaimListener(TownyMayors towny, LuckPerms luckPerms, TownyMayors townyMayors) {
         this.mayorsFile = new File(towny.getDataFolder(), "mayors.yml");
         this.luckPerms = luckPerms;
+        this.townyMayors = townyMayors;
         this.mayorsConfig = YamlConfiguration.loadConfiguration(mayorsFile);
     }
 
@@ -120,28 +122,42 @@ public class ClaimListener implements Listener {
             player.sendMessage(ChatColor.RED + "У вас має бути активна " + ChatColor.AQUA + "Wealth підписка" + ChatColor.RED + " для цього!");
             event.setCancelled(true);
         }
+
     }
 
     public int getChunkLimit(Player player) {
-
         User user = luckPerms.getUserManager().getUser(player.getUniqueId());
         if (user == null) {
             return 0;
         }
 
-        List<String> permissions = user.getNodes().stream().filter(node -> node instanceof PermissionNode).map(node -> ((PermissionNode)node).getPermission()).toList();
-        for (String permission : permissions) {
+        int totalLimit = 0;
+        List<String> permissions = user.getNodes().stream()
+                .filter(node -> node instanceof PermissionNode)
+                .map(node -> ((PermissionNode) node).getPermission())
+                .toList();
 
+        for (String permission : permissions) {
             if (permission.startsWith("townymayors.limit.")) {
                 try {
-                    return Integer.parseInt(permission.split("\\.")[2]);
+                    String configValue = townyMayors.getConfig().getString("players." + player.getUniqueId() + ".chunklimit");
+
+                    int baseLimit = Integer.parseInt(permission.split("\\.")[2]);
+                    if (configValue == null) {
+                        totalLimit += baseLimit;
+                    } else {
+                        int configLimit = Integer.parseInt(configValue);
+                        totalLimit += baseLimit + configLimit;
+                    }
                 } catch (NumberFormatException e) {
-                    Bukkit.getLogger().info("Invalid permission node: " + permission);
+                    Bukkit.getLogger().info("Invalid permission node or config value for player: " + player.getName() + " with permission: " + permission);
                 }
             }
         }
-        return 0;
+
+        return totalLimit;
     }
+
 
     private void saveMayorsConfig() {
         try {
