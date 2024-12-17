@@ -1,101 +1,62 @@
-[19:35:57] [ServerMain/INFO]: [bootstrap] Running Java 22 (OpenJDK 64-Bit Server VM 22.0.2+9-FR; Amazon.com Inc. Corretto-22.0.2.9.1) on Windows 11 10.0 (amd64)
-[19:35:57] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.4-15-master@bb76819 (2024-12-15T09:48:21Z) for Minecraft 1.21.4
-[19:35:57] [ServerMain/WARN]: [oshi.util.platform.windows.PerfDataUtil] Failed to add PDH Counter: \Paging File(_Total)\% Usage, Error code: 0xC0000BB8
-[19:35:57] [ServerMain/WARN]: [oshi.util.platform.windows.PerfCounterQueryHandler] Failed to add counter for PDH counter: \Paging File(_Total)\% Usage
-[19:35:57] [ServerMain/INFO]: [oshi.util.platform.windows.PerfCounterQuery] Disabling further attempts to query Paging File.
-[19:35:57] [ServerMain/WARN]: [oshi.util.platform.windows.WmiQueryHandler] COM exception: Invalid Class Win32_PerfRawData_PerfOS_PagingFile
-[19:35:58] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
-[19:35:58] [Paper Plugin Remapper Thread - 1/INFO]: [PluginRemapper] Remapping plugin 'C:\Users\Ilya0\IdeaProjects\uaproject-towny-main\build\libs\TownyMayors-1.0-SNAPSHOT.jar'...
-[19:35:58] [Paper Plugin Remapper Thread - 1/INFO]: [PluginRemapper] Done remapping plugin 'C:\Users\Ilya0\IdeaProjects\uaproject-towny-main\build\libs\TownyMayors-1.0-SNAPSHOT.jar' in 162ms.
-[19:35:58] [ServerMain/INFO]: [PluginInitializerManager] Initialized 4 plugins
-[19:35:58] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (4):
- - LuckPerms (5.4.145), Towny (0.100.4.0), TownyChat (0.116), TownyMayors (1.0-SNAPSHOT)
-[19:36:01] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[19:36:03] [ServerMain/INFO]: Loaded 1370 recipes
-[19:36:03] [ServerMain/INFO]: Loaded 1481 advancements
-[19:36:03] [ServerMain/INFO]: [MCTypeRegistry] Initialising converters for DataConverter...
-[19:36:03] [ServerMain/INFO]: [MCTypeRegistry] Finished initialising converters for DataConverter in 163,2ms
-[19:36:03] [Server thread/INFO]: Starting minecraft server version 1.21.4
-[19:36:03] [Server thread/INFO]: Loading properties
-[19:36:03] [Server thread/INFO]: This server is running Paper version 1.21.4-15-master@bb76819 (2024-12-15T09:48:21Z) (Implementing API version 1.21.4-R0.1-SNAPSHOT)
-[19:36:04] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
-[19:36:04] [Server thread/INFO]: Server Ping Player Sample Count: 12
-[19:36:04] [Server thread/INFO]: Using 4 threads for Netty based IO
-[19:36:04] [Server thread/INFO]: [MoonriseCommon] Paper is using 3 worker threads, 1 I/O threads
-[19:36:04] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
-[19:36:05] [Server thread/INFO]: Default game type: SURVIVAL
-[19:36:05] [Server thread/INFO]: Generating keypair
-[19:36:05] [Server thread/INFO]: Starting Minecraft server on *:25565
-[19:36:05] [Server thread/INFO]: Using default channel type
-[19:36:05] [Server thread/INFO]: Paper: Using Java compression from Velocity.
-[19:36:05] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
-[19:36:05] [Server thread/INFO]: [LuckPerms] Loading server plugin LuckPerms v5.4.145
-[19:36:05] [Server thread/INFO]: [Towny] Loading server plugin Towny v0.100.4.0
-[19:36:05] [Server thread/INFO]: [TownyMayors] Loading server plugin TownyMayors v1.0-SNAPSHOT
-[19:36:05] [Server thread/INFO]: [TownyChat] Loading server plugin TownyChat v0.116
-[19:36:05] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
-[19:36:05] [Server thread/INFO]: [LuckPerms] Enabling LuckPerms v5.4.145
-[19:36:05] [Server thread/INFO]:         __    
-[19:36:05] [Server thread/INFO]:   |    |__)   LuckPerms v5.4.145
-[19:36:05] [Server thread/INFO]:   |___ |      Running on Bukkit - Paper
-[19:36:05] [Server thread/INFO]: 
-[19:36:05] [Server thread/INFO]: [LuckPerms] Loading configuration...
-[19:36:05] [Server thread/INFO]: [LuckPerms] Loading storage provider... [H2]
-[19:36:06] [Server thread/INFO]: [LuckPerms] Loading internal permission managers...
-[19:36:06] [Server thread/INFO]: [LuckPerms] Performing initial data load...
-[19:36:06] [Server thread/INFO]: [LuckPerms] Successfully enabled. (took 953ms)
-[19:36:06] [Server thread/INFO]: Preparing level "world"
-[19:36:06] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[19:36:07] [Server thread/INFO]: Preparing spawn area: 0%
-[19:36:07] [Server thread/INFO]: Preparing spawn area: 0%
-[19:36:07] [Server thread/INFO]: Time elapsed: 595 ms
-[19:36:07] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
-[19:36:07] [Server thread/INFO]: Preparing spawn area: 0%
-[19:36:07] [Server thread/INFO]: Time elapsed: 126 ms
-[19:36:07] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
-[19:36:07] [Server thread/INFO]: Preparing spawn area: 0%
-[19:36:07] [Server thread/INFO]: Time elapsed: 56 ms
-[19:36:07] [Server thread/INFO]: [Towny] Enabling Towny v0.100.4.0
-[19:36:07] [Server thread/INFO]: ====================      Towny      ========================
-[19:36:08] [Server thread/INFO]: [Towny] Successfully loaded translations for 42 languages.
-[19:36:08] [Server thread/INFO]: [Towny] Config: Loaded 9 townblock types: shop, inn, arena, jail, default, bank, wilds, farm, embassy.
-[19:36:08] [Server thread/INFO]: [Towny] Database: [Load] flatfile [Save] flatfile
-[19:36:08] [Server thread/INFO]: [Towny] Database: Loaded in 72ms.
-[19:36:08] [Server thread/WARN]: [Towny] The 'nationCapitalBonusOutpostLimit' option in the nation levels at numResidents = 0 does not have a value, falling back to '0'.
-[19:36:08] [Server thread/WARN]: [Towny] The 'nationCapitalBonusOutpostLimit' option in the nation levels at numResidents = 10 does not have a value, falling back to '0'.
-[19:36:08] [Server thread/WARN]: [Towny] The 'nationCapitalBonusOutpostLimit' option in the nation levels at numResidents = 20 does not have a value, falling back to '0'.
-[19:36:08] [Server thread/WARN]: [Towny] The 'nationCapitalBonusOutpostLimit' option in the nation levels at numResidents = 30 does not have a value, falling back to '0'.
-[19:36:08] [Server thread/WARN]: [Towny] The 'nationCapitalBonusOutpostLimit' option in the nation levels at numResidents = 40 does not have a value, falling back to '0'.
-[19:36:08] [Server thread/WARN]: [Towny] The 'nationCapitalBonusOutpostLimit' option in the nation levels at numResidents = 60 does not have a value, falling back to '0'.
-[19:36:08] [ForkJoinPool.commonPool-worker-1/INFO]: [Towny] Cleaning up old backups...
-[19:36:08] [ForkJoinPool.commonPool-worker-1/INFO]: [Towny] Successfully cleaned backups.
-[19:36:08] [ForkJoinPool.commonPool-worker-1/INFO]: [Towny] Making backup...
-[19:36:08] [Folia Async Scheduler Thread #0/INFO]: [Towny] Time until a New Day: 16 hours, 23 minutes, 52 seconds
-[19:36:08] [Folia Async Scheduler Thread #1/INFO]: [Towny] Checking for updates...
-[19:36:09] [Server thread/INFO]: [Towny] Searching for third-party plugins...
-[19:36:09] [Server thread/INFO]: [Towny] Plugins found: 
-[19:36:09] [Server thread/INFO]: [Towny]   Permissions: TownyPerms, BukkitPermissions
-[19:36:09] [Server thread/INFO]: [Towny]   Add-ons: TownyChat v0.116
-[19:36:09] [Server thread/INFO]: [Towny]   Warning: No compatible Economy plugins found. Install
-                           Vault.jar or Reserve.jar with any of the supported eco
-                           systems. If you do not want an economy to be used, set
-                           using_economy: false in your Towny config.yml.
-[19:36:09] [ForkJoinPool.commonPool-worker-1/INFO]: [Towny] Towny flatfiles and settings successfully backed up.
-[19:36:09] [Server thread/INFO]: =============================================================
-[19:36:09] [Server thread/INFO]: [Towny] Version: 0.100.4.0 - Plugin Enabled
-[19:36:09] [Server thread/INFO]: =============================================================
-[19:36:09] [Server thread/INFO]: [TownyMayors] Enabling TownyMayors v1.0-SNAPSHOT
-[19:36:09] [Server thread/WARN]: [Towny] Error: The town nnr tried to load an invalid name, attempting to rename it to Town1.
-[19:36:09] [Server thread/ERROR]: [Towny] Loading Error: Could not read town data 'nnr'.
-[19:36:09] [Server thread/INFO]: [TownyMayors] TownyMayors has been enabled!
-[19:36:09] [Server thread/INFO]: [TownyChat] Enabling TownyChat v0.116
-[19:36:09] [Server thread/INFO]: [TownyChat] Towny version 0.100.4.0 found.
-[19:36:09] [Server thread/INFO]: [TownyChat] Default Channel set to general
-[19:36:09] [Server thread/INFO]: [spark] Starting background profiler...
-[19:36:09] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
-[19:36:09] [Server thread/INFO]: Done preparing level "world" (3.091s)
-[19:36:09] [Server thread/INFO]: Running delayed init tasks
-[19:36:09] [Server thread/INFO]: [TownyChat] -******* TownyChat enabled *******-
-[19:36:09] [Server thread/INFO]: Done (13.211s)! For help, type "help"
-[19:36:09] [Folia Async Scheduler Thread #1/INFO]: [Towny] New update available: 0.101.0.3 | Current version: 0.100.4.0
-[19:36:09] [Folia Async Scheduler Thread #1/INFO]: [Towny] Download it here: https://github.com/TownyAdvanced/Towny/releases/tag/0.101.0.3
+[20:41:15] [ServerMain/INFO]: [bootstrap] Running Java 22 (OpenJDK 64-Bit Server VM 22.0.2+9-FR; Amazon.com Inc. Corretto-22.0.2.9.1) on Windows 11 10.0 (amd64)
+[20:41:15] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.4-15-master@bb76819 (2024-12-15T09:48:21Z) for Minecraft 1.21.4
+[20:41:16] [ServerMain/WARN]: [oshi.util.platform.windows.PerfDataUtil] Failed to add PDH Counter: \Paging File(_Total)\% Usage, Error code: 0xC0000BB8
+[20:41:16] [ServerMain/WARN]: [oshi.util.platform.windows.PerfCounterQueryHandler] Failed to add counter for PDH counter: \Paging File(_Total)\% Usage
+[20:41:16] [ServerMain/INFO]: [oshi.util.platform.windows.PerfCounterQuery] Disabling further attempts to query Paging File.
+[20:41:16] [ServerMain/WARN]: [oshi.util.platform.windows.WmiQueryHandler] COM exception: Invalid Class Win32_PerfRawData_PerfOS_PagingFile
+[20:41:16] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[20:41:16] [Paper Plugin Remapper Thread - 2/INFO]: [PluginRemapper] Remapping plugin 'C:\Users\Ilya0\IdeaProjects\uaproject-towny-main\build\libs\TownyMayors-1.0-SNAPSHOT.jar'...
+[20:41:16] [Paper Plugin Remapper Thread - 2/INFO]: [PluginRemapper] Done remapping plugin 'C:\Users\Ilya0\IdeaProjects\uaproject-towny-main\build\libs\TownyMayors-1.0-SNAPSHOT.jar' in 483ms.
+[20:41:16] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
+[20:41:16] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (1):
+ - TownyMayors (1.0-SNAPSHOT)
+[20:41:20] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[20:41:21] [ServerMain/INFO]: Loaded 1370 recipes
+[20:41:21] [ServerMain/INFO]: Loaded 1481 advancements
+[20:41:21] [ServerMain/INFO]: [MCTypeRegistry] Initialising converters for DataConverter...
+[20:41:21] [ServerMain/INFO]: [MCTypeRegistry] Finished initialising converters for DataConverter in 170,4ms
+[20:41:21] [Server thread/INFO]: Starting minecraft server version 1.21.4
+[20:41:21] [Server thread/INFO]: Loading properties
+[20:41:21] [Server thread/INFO]: This server is running Paper version 1.21.4-15-master@bb76819 (2024-12-15T09:48:21Z) (Implementing API version 1.21.4-R0.1-SNAPSHOT)
+[20:41:22] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[20:41:22] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[20:41:22] [Server thread/INFO]: Using 4 threads for Netty based IO
+[20:41:23] [Server thread/INFO]: [MoonriseCommon] Paper is using 3 worker threads, 1 I/O threads
+[20:41:23] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
+[20:41:23] [Server thread/INFO]: Default game type: SURVIVAL
+[20:41:23] [Server thread/INFO]: Generating keypair
+[20:41:23] [Server thread/INFO]: Starting Minecraft server on *:25565
+[20:41:23] [Server thread/INFO]: Using default channel type
+[20:41:23] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[20:41:23] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[20:41:23] [Server thread/ERROR]: [ModernPluginLoadingStrategy] Could not load 'plugins\.paper-remapped\extra-plugins\TownyMayors-1.0-SNAPSHOT-1734464476346.jar' in 'plugins\.paper-remapped\extra-plugins'
+org.bukkit.plugin.UnknownDependencyException: Unknown/missing dependency plugins: [Towny]. Please download and install these plugins to run 'TownyMayors'.
+	at io.papermc.paper.plugin.entrypoint.strategy.modern.ModernPluginLoadingStrategy.loadProviders(ModernPluginLoadingStrategy.java:82) ~[paper-1.21.4.jar:1.21.4-15-bb76819]
+	at io.papermc.paper.plugin.storage.SimpleProviderStorage.enter(SimpleProviderStorage.java:38) ~[paper-1.21.4.jar:1.21.4-15-bb76819]
+	at io.papermc.paper.plugin.entrypoint.LaunchEntryPointHandler.enter(LaunchEntryPointHandler.java:40) ~[paper-1.21.4.jar:1.21.4-15-bb76819]
+	at org.bukkit.craftbukkit.CraftServer.loadPlugins(CraftServer.java:561) ~[paper-1.21.4.jar:1.21.4-15-bb76819]
+	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:289) ~[paper-1.21.4.jar:1.21.4-15-bb76819]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1236) ~[paper-1.21.4.jar:1.21.4-15-bb76819]
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:341) ~[paper-1.21.4.jar:1.21.4-15-bb76819]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[?:?]
+[20:41:23] [Server thread/INFO]: Preparing level "world"
+[20:41:23] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[20:41:23] [Server thread/INFO]: Preparing spawn area: 0%
+[20:41:24] [Server thread/INFO]: Preparing spawn area: 0%
+[20:41:24] [Server thread/INFO]: Time elapsed: 597 ms
+[20:41:24] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[20:41:24] [Server thread/INFO]: Preparing spawn area: 0%
+[20:41:24] [Server thread/INFO]: Time elapsed: 119 ms
+[20:41:24] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[20:41:24] [Server thread/INFO]: Preparing spawn area: 0%
+[20:41:24] [Server thread/INFO]: Time elapsed: 61 ms
+[20:41:24] [Server thread/INFO]: [spark] Starting background profiler...
+[20:41:24] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
+[20:41:24] [Server thread/INFO]: Done preparing level "world" (1.328s)
+[20:41:24] [Server thread/INFO]: Running delayed init tasks
+[20:41:24] [Server thread/INFO]: Done (10.116s)! For help, type "help"
+[20:41:24] [Server thread/INFO]: *************************************************************************************
+[20:41:24] [Server thread/INFO]: This is the first time you're starting this server.
+[20:41:24] [Server thread/INFO]: It's recommended you read our 'Getting Started' documentation for guidance.
+[20:41:24] [Server thread/INFO]: View this and more helpful information here: https://docs.papermc.io/paper/next-steps
+[20:41:24] [Server thread/INFO]: *************************************************************************************

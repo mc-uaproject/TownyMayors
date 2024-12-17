@@ -89,9 +89,13 @@ public class ClaimListener implements Listener {
             return;
         }
 
-        int chunkLimit = getChunkLimit(player);
-        if (chunkLimit <= 0) {
-            player.sendMessage(ChatColor.RED + "У вас має бути активна " + ChatColor.AQUA + "Wealth підписка" + ChatColor.RED + " для цього!");
+        User user = luckPerms.getUserManager().getUser(player.getUniqueId());
+        if (user == null) {
+            return;
+        }
+
+        if (hasNode(user, "group.wealth2")) {
+            player.sendMessage(ChatColor.RED + "У вас має бути активна " + ChatColor.AQUA + "Wealth підписка" + ChatColor.RED + " другого рівня для цього!");
             event.setCancelled(true);
         }
     }
@@ -103,8 +107,12 @@ public class ClaimListener implements Listener {
             return;
         }
 
-        int chunkLimit = getChunkLimit(player);
-        if (chunkLimit <= 0) {
+        User user = luckPerms.getUserManager().getUser(player.getUniqueId());
+        if (user == null) {
+            return;
+        }
+
+        if (hasNode(user, "group.wealth1")) {
             player.sendMessage(ChatColor.RED + "У вас має бути активна " + ChatColor.AQUA + "Wealth підписка" + ChatColor.RED + " для цього!");
             event.setCancelled(true);
         }
@@ -116,13 +124,21 @@ public class ClaimListener implements Listener {
         if (player == null) {
             return;
         }
+        User user = luckPerms.getUserManager().getUser(player.getUniqueId());
+        if (user == null) {
+            return;
+        }
 
-        int chunkLimit = getChunkLimit(player);
-        if (chunkLimit <= 0) {
-            player.sendMessage(ChatColor.RED + "У вас має бути активна " + ChatColor.AQUA + "Wealth підписка" + ChatColor.RED + " для цього!");
+        if (hasNode(user, "group.wealth2")) {
+            player.sendMessage(ChatColor.RED + "У вас має бути активна " + ChatColor.AQUA + "Wealth підписка" + ChatColor.RED + " другого рівня для цього!");
             event.setCancelled(true);
         }
 
+    }
+
+    private boolean hasNode(User user, String keyPrefix) {
+            return user.data().toCollection().stream()
+                    .anyMatch(node -> node.getKey().startsWith(keyPrefix));
     }
 
     public int getChunkLimit(Player player) {
