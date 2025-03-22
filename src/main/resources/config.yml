@@ -1,4 +1,46 @@
-players:
-  playerUuid:
-    chunklimit:
-    wealthgroup:
+# TownyMayors Configuration
+
+# Permission-based benefits configuration
+permissions:
+  # Permission groups that provide benefits
+  # Each group needs a permission node and defines its benefits
+  groups:
+    # Example: A player with "townymayors.wealth.tier1" permission will get these benefits
+    - permission: "townymayors.sponsor.wealth"
+      benefits:
+        free-rename: false
+        free-color-change: false
+        daily-tax-reduction: 50 # percentage reduction (100 = free)
+        nation-tax-reduction: 50
+    # Example: A player with "townymayors.wealth.tier2" permission will get these benefits
+    - permission: "townymayors.sponsor.astral"
+      benefits:
+        free-rename: true
+        free-color-change: false
+        daily-tax-reduction: 75
+        nation-tax-reduction: 75
+    # Example: A player with "townymayors.wealth.tier3" permission will get these benefits
+    - permission: "townymayors.sponsor.omega"
+      benefits:
+        free-rename: true
+        free-color-change: true
+        daily-tax-reduction: 90
+        nation-tax-reduction: 90
+    - permission: "townymayors.sponsor.eternal"
+      benefits:
+        free-rename: true
+        free-color-change: true
+        daily-tax-reduction: 100 # Free
+        nation-tax-reduction: 100
+  # Default values if permissions don't match or player has no permission
+  default:
+    free-rename: false
+    free-color-change: false
+    daily-tax-reduction: 0
+    nation-tax-reduction: 0
+
+# Debug settings
+debug:
+  log-tax-reductions: false
+  log-wealth-owners: false
+  log-level: INFO # INFO, WARNING, SEVERE

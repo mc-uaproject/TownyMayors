@@ -4,21 +4,22 @@ main: dev.ua.ikeepcalm.townymayors.TownyMayors
 api-version: '1.21'
 depend:
   - Towny
+  - LuckPerms
+description: Provides town tax reductions and free town management actions for players with special permissions.
+author: ikeepcalm
 permissions:
-  limit.1:
-    description: Allows adding players to the graylist
+  townymayors.sponsor.wealth:
+    description: Provides basic town benefits
     default: false
-  limit.2:
-    description: Allows adding players from the graylist
+  townymayors.sponsor.astral:
+    description: Provides enhanced town benefits
     default: false
-commands:
-  grantwealth:
-    description: Grants wealth node to a player
-  removewealth:
-    description: Removes wealth node from a player
-  getchunklimit:
-    description: Gets a town chunk limit of a player
-  setchunklimit:
-    description: Sets a town chunk limit of a player to selected value
-  removechunklimit:
-    description: Removes all townymayors.limit nodes of a player
+  townymayors.sponsor.omega:
+    description: Provides premium town benefits
+    default: false
+  townymayors.sponsor.eternal:
+    description: Provides complete town benefits
+    default: false
+  townymayors.admin:
+    description: Provides access to admin commands
+    default: op

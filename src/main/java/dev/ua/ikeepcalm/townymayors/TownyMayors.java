@@ -1,24 +1,27 @@
 package dev.ua.ikeepcalm.townymayors;
 
 import com.palmergames.bukkit.towny.Towny;
-import dev.ua.ikeepcalm.townymayors.commands.*;
-import dev.ua.ikeepcalm.townymayors.listeners.ClaimListener;
-import dev.ua.ikeepcalm.townymayors.tasks.MayorTask;
+import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
+import dev.ua.ikeepcalm.townymayors.commands.MapcolorSubcommand;
+import dev.ua.ikeepcalm.townymayors.commands.RenameSubcommand;
+import dev.ua.ikeepcalm.townymayors.listeners.TaxListener;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Objects;
-
 public final class TownyMayors extends JavaPlugin {
 
-    Towny towny = (Towny) getServer().getPluginManager().getPlugin("Towny");
+    public static TownyMayors INSTANCE;
+
+    private Towny towny;
     private LuckPerms luckPerms;
-    private ClaimListener claimListener;
 
     @Override
     public void onEnable() {
+        INSTANCE = this;
+
+        towny = (Towny) getServer().getPluginManager().getPlugin("Towny");
         if (towny == null) {
             getLogger().severe("Towny is not installed! Disabling TownyMayors...");
             getServer().getPluginManager().disablePlugin(this);
@@ -28,26 +31,24 @@ public final class TownyMayors extends JavaPlugin {
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider != null) {
             luckPerms = provider.getProvider();
+        } else {
+            getLogger().severe("LuckPerms is not installed! Disabling TownyMayors...");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
         }
 
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
         }
 
-        getConfig().options().copyDefaults(true);
         saveDefaultConfig();
+        getConfig().options().copyDefaults(true);
+        saveConfig();
 
-        getServer().getPluginManager().registerEvents(new ClaimListener(this, luckPerms, this), this);
-        new MayorTask(this, luckPerms).runTaskTimer(this, 0, 20 * 60 * 180);
+        getServer().getPluginManager().registerEvents(new TaxListener(this), this);
 
-        claimListener = new ClaimListener(this, luckPerms, this);
-        Objects.requireNonNull(getCommand("getchunklimit")).setExecutor(new GetChunkLimit(claimListener, luckPerms));
-        Objects.requireNonNull(getCommand("setchunklimit")).setExecutor(new SetChunkLimit(luckPerms, this, claimListener));
-        Objects.requireNonNull(getCommand("removechunklimit")).setExecutor(new RemoveChunkLimit(luckPerms, claimListener));
-
-        //unnecessary
-        //Objects.requireNonNull(getCommand("grantwealth")).setExecutor(new GrantWealth(luckPerms));
-        //Objects.requireNonNull(getCommand("removewealth")).setExecutor(new RemoveWealth(luckPerms));
+        TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN, "rename", new RenameSubcommand(this));
+        TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN, "mapcolor", new MapcolorSubcommand(this));
 
         getLogger().info("TownyMayors has been enabled!");
     }
@@ -58,4 +59,11 @@ public final class TownyMayors extends JavaPlugin {
         getLogger().info("TownyMayors has been disabled!");
     }
 
+    public Towny getTowny() {
+        return towny;
+    }
+
+    public LuckPerms getLuckPerms() {
+        return luckPerms;
+    }
 }
