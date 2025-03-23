@@ -1,46 +1,71 @@
 # TownyMayors Configuration
 
+# Default costs for various actions
+default-costs:
+  town-rename: 128.0
+  town-mapcolor: 128.0
+  nation-rename: 180.0
+  nation-mapcolor: 180.0
+  town-neutrality-upkeep: 5.0
+  nation-neutrality-upkeep: 10.0
+
 # Permission-based benefits configuration
 permissions:
   # Permission groups that provide benefits
   # Each group needs a permission node and defines its benefits
   groups:
-    # Example: A player with "townymayors.wealth.tier1" permission will get these benefits
     - permission: "townymayors.sponsor.wealth"
       benefits:
         free-rename: false
+        free-nation-rename: false
         free-color-change: false
+        free-nation-color-change: false
+        free-neutrality: true
+        free-nation-neutrality: true
         daily-tax-reduction: 50 # percentage reduction (100 = free)
         nation-tax-reduction: 50
-    # Example: A player with "townymayors.wealth.tier2" permission will get these benefits
     - permission: "townymayors.sponsor.astral"
       benefits:
         free-rename: true
+        free-nation-rename: false
         free-color-change: false
+        free-nation-color-change: false
+        free-neutrality: true
+        free-nation-neutrality: true
         daily-tax-reduction: 75
         nation-tax-reduction: 75
-    # Example: A player with "townymayors.wealth.tier3" permission will get these benefits
     - permission: "townymayors.sponsor.omega"
       benefits:
         free-rename: true
+        free-nation-rename: true
         free-color-change: true
+        free-nation-color-change: false
+        free-neutrality: true
+        free-nation-neutrality: true
         daily-tax-reduction: 90
         nation-tax-reduction: 90
     - permission: "townymayors.sponsor.eternal"
       benefits:
         free-rename: true
+        free-nation-rename: true
         free-color-change: true
+        free-nation-color-change: true
+        free-neutrality: true
+        free-nation-neutrality: true
         daily-tax-reduction: 100 # Free
         nation-tax-reduction: 100
-  # Default values if permissions don't match or player has no permission
   default:
     free-rename: false
+    free-nation-rename: false
     free-color-change: false
+    free-nation-color-change: false
+    free-neutrality: false
+    free-nation-neutrality: false
     daily-tax-reduction: 0
     nation-tax-reduction: 0
 
 # Debug settings
 debug:
-  log-tax-reductions: false
-  log-wealth-owners: false
+  log-tax-reductions: true
+  log-wealth-owners: true
   log-level: INFO # INFO, WARNING, SEVERE

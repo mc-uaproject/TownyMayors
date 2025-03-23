@@ -1,4 +1,4 @@
-package dev.ua.ikeepcalm.townymayors.commands;
+package dev.ua.ikeepcalm.townymayors.commands.nations;
 
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
@@ -6,7 +6,7 @@ import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.confirmations.Confirmation;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Nation;
 import dev.ua.ikeepcalm.townymayors.TownyMayors;
 import dev.ua.ikeepcalm.townymayors.utils.BenefitsUtil;
 import org.bukkit.ChatColor;
@@ -30,7 +30,7 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
 
     public MapcolorSubcommand(TownyMayors plugin) {
         this.plugin = plugin;
-        this.COLOR_CHANGE_COST = plugin.getConfig().getDouble("default-costs.town-mapcolor", 640.0);
+        this.COLOR_CHANGE_COST = plugin.getConfig().getDouble("default-costs.nation-mapcolor", 1280.0);
     }
 
     @Override
@@ -41,26 +41,31 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length < 1) {
-            player.sendMessage(ChatColor.RED + "Використання: /town mapcolor <#hex або колір>");
-            player.sendMessage(ChatColor.RED + "Наприклад: /town mapcolor #FF0000");
+            player.sendMessage(ChatColor.RED + "Використання: /nation mapcolor <#hex або колір>");
+            player.sendMessage(ChatColor.RED + "Наприклад: /nation mapcolor #FF0000");
             return true;
         }
 
         try {
             Resident resident = TownyAPI.getInstance().getResident(player);
             if (resident == null) {
-                player.sendMessage(ChatColor.RED + "Для цьго ви маєте перебувати в місті!");
+                player.sendMessage(ChatColor.RED + "Для цьго ви маєте перебувати в нації!");
                 return true;
             }
 
-            Town town = resident.getTown();
-            if (town == null) {
-                player.sendMessage(ChatColor.RED + "Вашого міста не знайдено. Ви безхатько?");
+            if (!resident.hasNation()) {
+                player.sendMessage(ChatColor.RED + "Ви не належите до нації!");
                 return true;
             }
 
-            if (!town.getMayor().equals(resident)) {
-                player.sendMessage(ChatColor.RED + "Тільки мер може змінювати колір на мапі!");
+            Nation nation = resident.getNation();
+            if (nation == null) {
+                player.sendMessage(ChatColor.RED + "Вашої нації не знайдено.");
+                return true;
+            }
+
+            if (!nation.getKing().equals(resident)) {
+                player.sendMessage(ChatColor.RED + "Тільки король/лідер нації може змінювати колір на мапі!");
                 return true;
             }
 
@@ -82,35 +87,35 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
             final String finalColorCode = colorCode;
 
             // Check if player has free color change benefit
-            boolean freeColorChange = BenefitsUtil.getBooleanBenefitForPlayer(player.getUniqueId(), "free-color-change");
+            boolean freeColorChange = BenefitsUtil.getBooleanBenefitForPlayer(player.getUniqueId(), "free-nation-color-change");
 
             if (freeColorChange) {
                 // Perform free color change
                 if (plugin.getConfig().getBoolean("debug.log-wealth-owners", false)) {
                     plugin.getLogger().log(Level.INFO,
-                            "Player " + player.getName() + " changed town map color to " + finalColorCode +
+                            "Player " + player.getName() + " changed nation map color to " + finalColorCode +
                                     " for free due to benefits");
                 }
 
                 // Ask for confirmation
                 Confirmation.runOnAccept(() -> {
                             try {
-                                String oldColor = town.getMapColorHexCode();
-                                town.setMapColorHexCode(finalColorCode);
-                                TownyMessaging.sendPrefixedTownMessage(town,
-                                        "Колір мапи міста змінено з " + oldColor + " на " + finalColorCode);
+                                String oldColor = nation.getMapColorHexCode();
+                                nation.setMapColorHexCode(finalColorCode);
+                                TownyMessaging.sendPrefixedNationMessage(nation,
+                                        "Колір мапи нації змінено з " + oldColor + " на " + finalColorCode);
                             } catch (Exception e) {
                                 player.sendMessage(ChatColor.RED + "Error: " + e.getMessage());
-                                plugin.getLogger().log(Level.WARNING, "Error changing town map color", e);
+                                plugin.getLogger().log(Level.WARNING, "Error changing nation map color", e);
                             }
                         })
-                        .setTitle("Підтвердіть зміну кольору мапи міста на " + finalColorCode)
+                        .setTitle("Підтвердіть зміну кольору мапи нації на " + finalColorCode)
                         .sendTo(player);
             } else {
-                // Check if town has enough money
+                // Check if nation has enough money
                 if (TownyEconomyHandler.isActive() && COLOR_CHANGE_COST > 0) {
-                    if (!town.getAccount().canPayFromHoldings(COLOR_CHANGE_COST)) {
-                        player.sendMessage(ChatColor.RED + "Ваше місто не може дозволити собі змінити колір мапи. Вартість: " +
+                    if (!nation.getAccount().canPayFromHoldings(COLOR_CHANGE_COST)) {
+                        player.sendMessage(ChatColor.RED + "Ваша нація не може дозволити собі змінити колір мапи. Вартість: " +
                                 TownyEconomyHandler.getFormattedBalance(COLOR_CHANGE_COST));
                         return true;
                     }
@@ -119,46 +124,46 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
                     Confirmation.runOnAcceptAsync(() -> {
                                 try {
                                     // Take money first
-                                    town.getAccount().withdraw(COLOR_CHANGE_COST, "Town map color change cost");
+                                    nation.getAccount().withdraw(COLOR_CHANGE_COST, "Nation map color change cost");
 
-                                    String oldColor = town.getMapColorHexCode();
-                                    town.setMapColorHexCode(finalColorCode);
-                                    TownyMessaging.sendPrefixedTownMessage(town,
-                                            "Колір мапи міста змінено з " + oldColor + " на " + finalColorCode);
+                                    String oldColor = nation.getMapColorHexCode();
+                                    nation.setMapColorHexCode(finalColorCode);
+                                    TownyMessaging.sendPrefixedNationMessage(nation,
+                                            "Колір мапи нації змінено з " + oldColor + " на " + finalColorCode);
 
-                                    player.sendMessage(ChatColor.GREEN + "Змінено колір мапи міста на " + finalColorCode + " за " +
+                                    player.sendMessage(ChatColor.GREEN + "Змінено колір мапи нації на " + finalColorCode + " за " +
                                             TownyEconomyHandler.getFormattedBalance(COLOR_CHANGE_COST));
                                 } catch (Exception e) {
                                     player.sendMessage(ChatColor.RED + "Error: " + e.getMessage());
-                                    plugin.getLogger().log(Level.WARNING, "Error changing town map color", e);
+                                    plugin.getLogger().log(Level.WARNING, "Error changing nation map color", e);
                                 }
                             })
                             .runOnCancel(() -> {
                                 player.sendMessage(ChatColor.RED + "Скасовано!");
                             })
-                            .setTitle("Підтвердіть зміну кольору мапи міста на " + finalColorCode)
+                            .setTitle("Підтвердіть зміну кольору мапи нації на " + finalColorCode)
                             .sendTo(player);
                 } else {
                     // Economy not active or free color change for everyone
                     Confirmation.runOnAccept(() -> {
                                 try {
-                                    String oldColor = town.getMapColorHexCode();
-                                    town.setMapColorHexCode(finalColorCode);
-                                    TownyMessaging.sendPrefixedTownMessage(town,
-                                            "Колір мапи міста змінено з " + oldColor + " на " + finalColorCode);
+                                    String oldColor = nation.getMapColorHexCode();
+                                    nation.setMapColorHexCode(finalColorCode);
+                                    TownyMessaging.sendPrefixedNationMessage(nation,
+                                            "Колір мапи нації змінено з " + oldColor + " на " + finalColorCode);
                                 } catch (Exception e) {
                                     player.sendMessage(ChatColor.RED + "Error: " + e.getMessage());
-                                    plugin.getLogger().log(Level.WARNING, "Error changing town map color", e);
+                                    plugin.getLogger().log(Level.WARNING, "Error changing nation map color", e);
                                 }
                             })
-                            .setTitle("Підтвердіть зміну кольору мапи міста на " + finalColorCode)
+                            .setTitle("Підтвердіть зміну кольору мапи нації на " + finalColorCode)
                             .sendTo(player);
                 }
             }
 
             return true;
         } catch (TownyException e) {
-            plugin.getLogger().log(Level.WARNING, "Error in mapcolor command", e);
+            plugin.getLogger().log(Level.WARNING, "Error in nation mapcolor command", e);
             player.sendMessage(ChatColor.RED + e.getMessage());
             return true;
         }

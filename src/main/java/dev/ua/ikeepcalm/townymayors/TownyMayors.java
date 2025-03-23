@@ -2,8 +2,8 @@ package dev.ua.ikeepcalm.townymayors;
 
 import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
-import dev.ua.ikeepcalm.townymayors.commands.MapcolorSubcommand;
-import dev.ua.ikeepcalm.townymayors.commands.RenameSubcommand;
+import dev.ua.ikeepcalm.townymayors.commands.towns.MapcolorSubcommand;
+import dev.ua.ikeepcalm.townymayors.commands.towns.RenameSubcommand;
 import dev.ua.ikeepcalm.townymayors.listeners.TaxListener;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -49,6 +49,8 @@ public final class TownyMayors extends JavaPlugin {
 
         TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN, "rename", new RenameSubcommand(this));
         TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN, "mapcolor", new MapcolorSubcommand(this));
+        TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.NATION, "mapcolor", new dev.ua.ikeepcalm.townymayors.commands.nations.MapcolorSubcommand(this));
+        TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.NATION, "rename", new dev.ua.ikeepcalm.townymayors.commands.nations.RenameSubcommand(this));
 
         getLogger().info("TownyMayors has been enabled!");
     }
