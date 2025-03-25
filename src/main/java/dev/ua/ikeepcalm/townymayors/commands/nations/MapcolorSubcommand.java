@@ -5,8 +5,8 @@ import com.palmergames.bukkit.towny.TownyEconomyHandler;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.confirmations.Confirmation;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
-import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.towny.object.Resident;
 import dev.ua.ikeepcalm.townymayors.TownyMayors;
 import dev.ua.ikeepcalm.townymayors.utils.BenefitsUtil;
 import org.bukkit.ChatColor;
@@ -84,7 +84,7 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
             }
 
             // Final color code to use
-            final String finalColorCode = colorCode;
+            final String finalColorCode = colorCode.replace("#", "").toLowerCase();
 
             // Check if player has free color change benefit
             boolean freeColorChange = BenefitsUtil.getBooleanBenefitForPlayer(player.getUniqueId(), "free-nation-color-change");

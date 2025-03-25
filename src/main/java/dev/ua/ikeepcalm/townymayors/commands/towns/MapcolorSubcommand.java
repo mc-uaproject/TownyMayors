@@ -79,7 +79,7 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
             }
 
             // Final color code to use
-            final String finalColorCode = colorCode;
+            final String finalColorCode = colorCode.replace("#", "").toLowerCase();
 
             // Check if player has free color change benefit
             boolean freeColorChange = BenefitsUtil.getBooleanBenefitForPlayer(player.getUniqueId(), "free-color-change");
