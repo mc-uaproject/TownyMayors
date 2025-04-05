@@ -4,7 +4,9 @@ import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
 import dev.ua.ikeepcalm.townymayors.commands.towns.MapcolorSubcommand;
 import dev.ua.ikeepcalm.townymayors.commands.towns.RenameSubcommand;
-import dev.ua.ikeepcalm.townymayors.listeners.TaxListener;
+import dev.ua.ikeepcalm.townymayors.listeners.TownClaimListener;
+import dev.ua.ikeepcalm.townymayors.listeners.TownCreationListener;
+import dev.ua.ikeepcalm.townymayors.listeners.TownTaxListener;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -45,7 +47,9 @@ public final class TownyMayors extends JavaPlugin {
         getConfig().options().copyDefaults(true);
         saveConfig();
 
-        getServer().getPluginManager().registerEvents(new TaxListener(this), this);
+        getServer().getPluginManager().registerEvents(new TownTaxListener(this), this);
+        getServer().getPluginManager().registerEvents(new TownClaimListener(this), this);
+        getServer().getPluginManager().registerEvents(new TownCreationListener(this), this);
 
         TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN, "rename", new RenameSubcommand(this));
         TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN, "mapcolor", new MapcolorSubcommand(this));

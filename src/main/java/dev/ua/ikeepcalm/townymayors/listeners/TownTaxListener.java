@@ -16,37 +16,12 @@ import java.util.UUID;
 
 import static dev.ua.ikeepcalm.townymayors.utils.BenefitsUtil.getBenefitForPlayer;
 
-public class TaxListener implements Listener {
+public class TownTaxListener implements Listener {
 
     private final TownyMayors plugin;
 
-    public TaxListener(TownyMayors plugin) {
+    public TownTaxListener(TownyMayors plugin) {
         this.plugin = plugin;
-    }
-
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onTownClaimCalculation(TownBlockClaimCostCalculationEvent event) {
-        Town town = event.getTown();
-        Resident mayor = town.getMayor();
-
-        if (mayor != null) {
-            UUID mayorUUID = mayor.getUUID();
-            int reduction = getBenefitForPlayer(mayorUUID, "claim-tax-reduction");
-            double originalPrice = event.getPrice();
-            double newPrice = originalPrice;
-            int plotAmount = event.getAmountOfRequestedTownBlocks();
-
-            if (reduction > 0) {
-                newPrice = originalPrice * plotAmount * (1 - (reduction / 100.0));
-
-                if (plugin.getConfig().getBoolean("debug.log-tax-reductions", false)) {
-                    BenefitsUtil.logMessage("Reduced town block claim cost for " + town.getName() +
-                            " from " + originalPrice + " to " + newPrice + " (" + reduction + "% reduction) for " + plotAmount + " chunks");
-                }
-            }
-
-            event.setPrice(newPrice);
-        }
     }
 
     @EventHandler(priority = EventPriority.HIGH)

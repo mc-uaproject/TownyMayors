@@ -27,6 +27,7 @@ permissions:
     - permission: "townymayors.sponsor.astral"
       benefits:
         free-rename: true
+        free-town-creation: true
         free-nation-rename: false
         free-color-change: false
         free-nation-color-change: false
@@ -38,6 +39,7 @@ permissions:
     - permission: "townymayors.sponsor.omega"
       benefits:
         free-rename: true
+        free-town-creation: true
         free-nation-rename: true
         free-color-change: true
         free-nation-color-change: false
@@ -49,6 +51,7 @@ permissions:
     - permission: "townymayors.sponsor.eternal"
       benefits:
         free-rename: true
+        free-town-creation: true
         free-nation-rename: true
         free-color-change: true
         free-nation-color-change: true
@@ -59,6 +62,7 @@ permissions:
         claim-tax-reduction: 70
   default:
     free-rename: false
+    free-town-creation: false
     free-nation-rename: false
     free-color-change: false
     free-nation-color-change: false
