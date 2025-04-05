@@ -1,6 +1,7 @@
 package dev.ua.ikeepcalm.townymayors.listeners;
 
 import com.palmergames.bukkit.towny.event.NationUpkeepCalculationEvent;
+import com.palmergames.bukkit.towny.event.TownBlockClaimCostCalculationEvent;
 import com.palmergames.bukkit.towny.event.TownUpkeepCalculationEvent;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -21,6 +22,31 @@ public class TaxListener implements Listener {
 
     public TaxListener(TownyMayors plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onTownClaimCalculation(TownBlockClaimCostCalculationEvent event) {
+        Town town = event.getTown();
+        Resident mayor = town.getMayor();
+
+        if (mayor != null) {
+            UUID mayorUUID = mayor.getUUID();
+            int reduction = getBenefitForPlayer(mayorUUID, "claim-tax-reduction");
+            double originalPrice = event.getPrice();
+            double newPrice = originalPrice;
+            int plotAmount = event.getAmountOfRequestedTownBlocks();
+
+            if (reduction > 0) {
+                newPrice = originalPrice * plotAmount * (1 - (reduction / 100.0));
+
+                if (plugin.getConfig().getBoolean("debug.log-tax-reductions", false)) {
+                    BenefitsUtil.logMessage("Reduced town block claim cost for " + town.getName() +
+                            " from " + originalPrice + " to " + newPrice + " (" + reduction + "% reduction) for " + plotAmount + " chunks");
+                }
+            }
+
+            event.setPrice(newPrice);
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGH)

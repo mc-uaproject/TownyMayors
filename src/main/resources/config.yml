@@ -34,6 +34,7 @@ permissions:
         free-nation-neutrality: true
         daily-tax-reduction: 75
         nation-tax-reduction: 75
+        claim-tax-reduction: 40
     - permission: "townymayors.sponsor.omega"
       benefits:
         free-rename: true
@@ -44,6 +45,7 @@ permissions:
         free-nation-neutrality: true
         daily-tax-reduction: 90
         nation-tax-reduction: 90
+        claim-tax-reduction: 60
     - permission: "townymayors.sponsor.eternal"
       benefits:
         free-rename: true
@@ -54,6 +56,7 @@ permissions:
         free-nation-neutrality: true
         daily-tax-reduction: 100 # Free
         nation-tax-reduction: 100
+        claim-tax-reduction: 70
   default:
     free-rename: false
     free-nation-rename: false
@@ -63,6 +66,7 @@ permissions:
     free-nation-neutrality: false
     daily-tax-reduction: 0
     nation-tax-reduction: 0
+    claim-tax-reduction: 0
 
 # Debug settings
 debug:
