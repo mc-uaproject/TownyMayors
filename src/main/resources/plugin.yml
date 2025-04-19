@@ -7,6 +7,12 @@ depend:
   - LuckPerms
 description: Provides town tax reductions and free town management actions for players with special permissions.
 author: ikeepcalm
+commands:
+  townymayors:
+    description: Main command for TownyMayors plugin
+    usage: /townymayors reload
+    aliases: [tm]
+    permission: townymayors.admin
 permissions:
   townymayors.sponsor.wealth:
     description: Provides basic town benefits

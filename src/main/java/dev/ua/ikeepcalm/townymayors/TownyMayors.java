@@ -2,6 +2,7 @@ package dev.ua.ikeepcalm.townymayors;
 
 import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
+import dev.ua.ikeepcalm.townymayors.commands.admin.ReloadCommand;
 import dev.ua.ikeepcalm.townymayors.commands.towns.MapcolorSubcommand;
 import dev.ua.ikeepcalm.townymayors.commands.towns.RenameSubcommand;
 import dev.ua.ikeepcalm.townymayors.listeners.TownClaimListener;
@@ -43,25 +44,31 @@ public final class TownyMayors extends JavaPlugin {
             getDataFolder().mkdir();
         }
 
+        // Load configuration
         saveDefaultConfig();
-        getConfig().options().copyDefaults(true);
-        saveConfig();
 
+        // Register events
         getServer().getPluginManager().registerEvents(new TownTaxListener(this), this);
         getServer().getPluginManager().registerEvents(new TownClaimListener(this), this);
         getServer().getPluginManager().registerEvents(new TownCreationListener(this), this);
 
+        // Register Towny subcommands
         TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN, "rename", new RenameSubcommand(this));
         TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN, "mapcolor", new MapcolorSubcommand(this));
         TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.NATION, "mapcolor", new dev.ua.ikeepcalm.townymayors.commands.nations.MapcolorSubcommand(this));
         TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.NATION, "rename", new dev.ua.ikeepcalm.townymayors.commands.nations.RenameSubcommand(this));
+
+        // Register plugin commands
+        ReloadCommand reloadCommand = new ReloadCommand(this);
+        getCommand("townymayors").setExecutor(reloadCommand);
+        getCommand("townymayors").setTabCompleter(reloadCommand);
 
         getLogger().info("TownyMayors has been enabled!");
     }
 
     @Override
     public void onDisable() {
-        saveConfig();
+        // We don't save the config on shutdown to avoid overwriting file changes
         getLogger().info("TownyMayors has been disabled!");
     }
 
