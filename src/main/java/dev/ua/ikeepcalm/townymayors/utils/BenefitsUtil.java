@@ -21,6 +21,8 @@ public class BenefitsUtil {
             return 0;
         }
 
+        int highestBenefit = TownyMayors.INSTANCE.getConfig().getInt("permissions.default." + benefitKey, 0);
+
         for (Map<?, ?> group : groups) {
             String permission = (String) group.get("permission");
 
@@ -32,22 +34,29 @@ public class BenefitsUtil {
                 Map<String, Object> benefits = (Map<String, Object>) group.get("benefits");
                 if (benefits != null && benefits.containsKey(benefitKey)) {
                     Object value = benefits.get(benefitKey);
+                    int benefitValue = 0;
+                    
                     if (value instanceof Integer) {
-                        return (Integer) value;
+                        benefitValue = (Integer) value;
                     } else if (value instanceof Double) {
-                        return ((Double) value).intValue();
+                        benefitValue = ((Double) value).intValue();
                     } else if (value instanceof String) {
                         try {
-                            return Integer.parseInt((String) value);
+                            benefitValue = Integer.parseInt((String) value);
                         } catch (NumberFormatException e) {
                             logMessage("Invalid numeric value for benefit " + benefitKey + ": " + value, Level.WARNING);
+                            continue;
                         }
+                    }
+                    
+                    if (benefitValue > highestBenefit) {
+                        highestBenefit = benefitValue;
                     }
                 }
             }
         }
 
-        return TownyMayors.INSTANCE.getConfig().getInt("permissions.default." + benefitKey, 0);
+        return highestBenefit;
     }
 
     @SuppressWarnings("unchecked")
@@ -62,6 +71,8 @@ public class BenefitsUtil {
             return false;
         }
 
+        boolean highestBenefit = TownyMayors.INSTANCE.getConfig().getBoolean("permissions.default." + benefitKey, false);
+
         for (Map<?, ?> group : groups) {
             String permission = (String) group.get("permission");
             if (permission == null || permission.isEmpty()) {
@@ -71,16 +82,22 @@ public class BenefitsUtil {
                 Map<String, Object> benefits = (Map<String, Object>) group.get("benefits");
                 if (benefits != null && benefits.containsKey(benefitKey)) {
                     Object value = benefits.get(benefitKey);
+                    boolean benefitValue = false;
+                    
                     if (value instanceof Boolean) {
-                        return (Boolean) value;
+                        benefitValue = (Boolean) value;
                     } else if (value instanceof String) {
-                        return Boolean.parseBoolean((String) value);
+                        benefitValue = Boolean.parseBoolean((String) value);
+                    }
+                    
+                    if (benefitValue) {
+                        highestBenefit = true;
                     }
                 }
             }
         }
 
-        return TownyMayors.INSTANCE.getConfig().getBoolean("permissions.default." + benefitKey, false);
+        return highestBenefit;
     }
 
     private static void logMessage(String message, Level level) {
@@ -100,5 +117,4 @@ public class BenefitsUtil {
             return Level.INFO;
         }
     }
-
 }
