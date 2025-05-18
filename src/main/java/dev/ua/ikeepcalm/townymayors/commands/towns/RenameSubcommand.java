@@ -65,7 +65,7 @@ public class RenameSubcommand implements CommandExecutor, TabCompleter {
             String newName = args[0];
 
             // Validate name
-            if (!newName.matches("^[a-zA-Z]+$")) {
+            if (!newName.matches("^[a-zA-Zа-яА-ЯіІїЇєЄґҐ]+$")) {
                 player.sendMessage(ChatColor.RED + "Назва містить недійсні символи. Дозволені тільки літери.");
                 return true;
             }
