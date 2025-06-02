@@ -97,6 +97,7 @@ public class RenameSubcommand implements CommandExecutor, TabCompleter {
                             try {
                                 String oldName = nation.getName();
                                 TownyUniverse.getInstance().getDataSource().renameNation(nation, newName);
+                                nation.save();
                                 TownyMessaging.sendPrefixedNationMessage(nation,
                                         Translatable.of("msg_nation_renamed", oldName, newName).defaultLocale());
                             } catch (TownyException e) {
@@ -122,6 +123,7 @@ public class RenameSubcommand implements CommandExecutor, TabCompleter {
 
                                     String oldName = nation.getName();
                                     TownyUniverse.getInstance().getDataSource().renameNation(nation, newName);
+                                    nation.save();
                                     TownyMessaging.sendPrefixedNationMessage(nation,
                                             Translatable.of("msg_nation_renamed", oldName, newName).defaultLocale());
 
@@ -142,6 +144,7 @@ public class RenameSubcommand implements CommandExecutor, TabCompleter {
                                 try {
                                     String oldName = nation.getName();
                                     TownyUniverse.getInstance().getDataSource().renameNation(nation, newName);
+                                    nation.save();
                                     TownyMessaging.sendPrefixedNationMessage(nation,
                                             Translatable.of("msg_nation_renamed", oldName, newName).defaultLocale());
                                 } catch (TownyException e) {
@@ -152,6 +155,8 @@ public class RenameSubcommand implements CommandExecutor, TabCompleter {
                             .sendTo(player);
                 }
             }
+
+
 
             return true;
         } catch (TownyException e) {

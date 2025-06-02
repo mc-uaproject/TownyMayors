@@ -97,6 +97,7 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
                             try {
                                 String oldColor = town.getMapColorHexCode();
                                 town.setMapColorHexCode(finalColorCode);
+                                town.save();
                                 TownyMessaging.sendPrefixedTownMessage(town,
                                         "Колір мапи міста змінено з " + oldColor + " на " + finalColorCode);
                             } catch (Exception e) {
@@ -123,6 +124,7 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
 
                                     String oldColor = town.getMapColorHexCode();
                                     town.setMapColorHexCode(finalColorCode);
+                                    town.save();
                                     TownyMessaging.sendPrefixedTownMessage(town,
                                             "Колір мапи міста змінено з " + oldColor + " на " + finalColorCode);
 
@@ -144,6 +146,7 @@ public class MapcolorSubcommand implements CommandExecutor, TabCompleter {
                                 try {
                                     String oldColor = town.getMapColorHexCode();
                                     town.setMapColorHexCode(finalColorCode);
+                                    town.save();
                                     TownyMessaging.sendPrefixedTownMessage(town,
                                             "Колір мапи міста змінено з " + oldColor + " на " + finalColorCode);
                                 } catch (Exception e) {
